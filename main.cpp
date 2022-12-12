@@ -104,13 +104,15 @@ struct CookieShop
         void produceHeat(bool isOvenOn);
         void displayTimer(std::string setTime);
         void displayTemp(std::string setTemp);
-        void lowerTemp(int currentTemp); 
+        void lowerTemp(int currentTemp);
+        void printOvenBrand();
     };
 
     void bakeCookies(bool isPreheatTempReached);
     float calculateTotalCustomerCharge(float cookiePrice = 1.95f, float coffeePrice = 3.15f); 
     void buyNewOven(Oven manufacturer);
     int hireNewStaff(int newStaffMember); 
+    void printNumOfStaff();
 };
 
 CookieShop::Oven::Oven() 
@@ -154,6 +156,12 @@ void CookieShop::Oven::lowerTemp(int currentTemp)
     }
 }
 
+void CookieShop::Oven::printOvenBrand()
+{
+    std::cout << "The oven's brand name is " << this->manufacturer << "." << std::endl;
+}
+
+
 CookieShop::CookieShop() 
 {
     std::cout << "CookieShop being constructed!" << std::endl;
@@ -196,6 +204,11 @@ int CookieShop::hireNewStaff(int totalStaffNeeded)
     return numberOfStaff;
 }
 
+void CookieShop::printNumOfStaff()
+{
+    std::cout << "Today, we have " << this->numberOfStaff << " staff members." << std::endl;
+}
+
 /*
  copied UDT 2:
  */
@@ -223,12 +236,14 @@ struct Airplane
         void landingGearRaised(bool isGearLeverInUpPostion);
         void talkToAirTrafficControl(bool isPushToTalkSwitchPressed);
         int addMoreDisplays(int displayTotal); 
+        void printNumOfPedals();
     };
 
     void takeOff(bool isRunwayClear, bool isTakeOffSpeedReached);
     void land(bool isLandingSpeedReached, bool areWheelsDeployed);
     void sendDataToControlTower(bool isGreenLightOn);
-    int  increaseTotalLuggage(int totalLuggage); 
+    int  increaseTotalLuggage(int totalLuggage);
+    void printPlaneWingLength();
 };
 
 Airplane::Cockpit::Cockpit()
@@ -274,6 +289,11 @@ int Airplane::Cockpit::addMoreDisplays(int displayTotal)
         std::cout <<"Increasing number of displays "<< numOfDisplays << std::endl;   
     }
     return numOfDisplays;
+}
+
+void Airplane::Cockpit::printNumOfPedals()
+{
+    std::cout << "The plane has " << this->numOfRudderPedals << " rudders." << std::endl;
 }
 
 Airplane::Airplane()
@@ -322,6 +342,12 @@ int Airplane::increaseTotalLuggage(int totalLuggage)
     }
     return numOfLuggagePieces;
 }
+
+void Airplane::printPlaneWingLength()
+{
+    std::cout << "The plane's wing length is " << this->lengthOfPlaneWings << " meters." << std::endl;
+}
+
 /*
  copied UDT 3:
  */
@@ -338,7 +364,8 @@ struct Laptop
     void typeLetter(bool isLetterKeyPressed);
     int productOfNumbers(int num1, int num2);
     void runSoftware(bool hasDoubleClickedIcon);
-    int increaseRam(int newRam); 
+    int increaseRam(int newRam);
+    void printNumOfUSBPorts();
     
 };
 
@@ -389,6 +416,12 @@ int Laptop::increaseRam(int addNewRam)
     }
     return amountOfRam;
 }
+
+void Laptop::printNumOfUSBPorts()
+{
+    std::cout << "The laptop has " << this->numOfUSBPorts << " USB ports." << std::endl;
+}
+
 /*
  new UDT 4:
  with 2 member functions
@@ -402,6 +435,7 @@ struct StripMall
 
     float calculateMonthlyEarnings(float CS1WeeklyEarnings, float CS2WeeklyEarnings);
     float constructionForMoreOvens(float howManyOvensNeeded);   
+    void printCS1CashOnHand();
 };
 
 StripMall::StripMall()
@@ -431,6 +465,11 @@ float StripMall::constructionForMoreOvens(float howManyOvensNeeded)
     return ovenSpaceNeeded;
 }
 
+void StripMall::printCS1CashOnHand()
+{
+    std::cout << "The first cookie shop has $" << this->cookieShop1.cashOnHand << " cash on hand." << std::endl;
+}
+
 /*
  new UDT 5:
  with 2 member functions
@@ -443,7 +482,8 @@ struct NewPlaneCompany
     Airplane::Cockpit cockpit1, cockpit2;
 
     float buySeatDisplays(float displayPrice);
-    float calculateTotalPilotSalary(float pilotSalary);  
+    float calculateTotalPilotSalary(float pilotSalary);
+    void printNumOfDisplays();
 };
 
 NewPlaneCompany::NewPlaneCompany()
@@ -470,6 +510,10 @@ float NewPlaneCompany::calculateTotalPilotSalary(float pilotSalary)
     return totalPilotSalary;
 }
 
+void NewPlaneCompany::printNumOfDisplays()
+{
+    std::cout << "The cockpits have " << this->cockpit1.numOfDisplays << " displays inside." << std::endl;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -526,7 +570,30 @@ int main()
 
     newPlaneCompany.buySeatDisplays(100);
     newPlaneCompany.calculateTotalPilotSalary(75000);
+    std::cout << std::endl;
+
+    std::cout << "We have " << cookieShop.numberOfStaff << " staff members today." << std::endl;
+    cookieShop.printNumOfStaff();
+
+    std::cout << newOven1.manufacturer << " is the oven's brand name." << std::endl;
+    newOven1.printOvenBrand();
+   
+    std::cout << "There are " << cockpit.numOfRudderPedals << " rudders on the plane." << std::endl;
+    cockpit.printNumOfPedals();
+ 
+    std::cout << "The length of the plane's wings are " << airplane.lengthOfPlaneWings << " meters." << std::endl;
+    airplane.printPlaneWingLength();
   
+    std::cout << "There are " << laptop.numOfUSBPorts << " USB ports on the laptop." << std::endl;
+    laptop.printNumOfUSBPorts();
+    
+    std::cout << "The cash on hand amount for first cookie shop is $" << stripMall.cookieShop1.cashOnHand << "." << std::endl;
+    stripMall.printCS1CashOnHand();
+
+    std::cout << "There are " << newPlaneCompany.cockpit1.numOfDisplays << " displays inside the cockpits." << std::endl;
+    newPlaneCompany.printNumOfDisplays();
+    std::cout << std::endl;
+    
     std::cout << "good to go!" << std::endl;
     
 }
